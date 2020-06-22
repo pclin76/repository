@@ -2,7 +2,6 @@ package tw.org.w3;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.System.Logger;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletContext;
@@ -14,8 +13,6 @@ import org.springframework.web.context.support.ServletContextResource;
  * @author P-C Lin (a.k.a 高科技黑手)
  */
 public class URIResolver implements javax.xml.transform.URIResolver {
-
-	private static final Logger LOGGER = System.getLogger(URIResolver.class.getCanonicalName());
 
 	/**
 	 * Servlet Context to pull the file from
@@ -92,12 +89,12 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 				inputStream = servletContextResource.getInputStream();
 				source = new StreamSource(inputStream);
 			} catch (IOException exception) {
-				LOGGER.log(Logger.Level.DEBUG, exception.getMessage(), exception);
+					exception.printStackTrace(System.err);
 			} finally {
 				try {
 					inputStream.close();
 				} catch (IOException exception) {
-					LOGGER.log(Logger.Level.WARNING, exception.getMessage(), exception);
+					exception.printStackTrace(System.err);
 				}
 			}
 		}
